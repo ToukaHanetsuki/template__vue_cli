@@ -6,9 +6,6 @@
       </router-link> |
       <router-link to="/about">
         About
-      </router-link> |
-      <router-link :to="{name: 'ExampleSort'}">
-        ExampleSort
       </router-link>
     </div>
     <router-view />

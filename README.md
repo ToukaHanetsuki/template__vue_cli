@@ -1,16 +1,17 @@
-# vue_cli_template
+# Template Vue CLI
 
 ## Requirement
 |  library  |  version  |
 | ---- | ---- |
-|  @vue/cli  |  4.5.4  |
 |  vue  |  2.6.11  |
-|  vuex  |  3.4.0  |
-|  vue-router  |  3.2.0  |
 |  vue-class-component  |  7.2.3  |
 |  vue-property-decorator  |  8.4.2  |
+|  vuex  |  3.4.0  |
 |  vuex-module-decorators  |  0.17.0  |
+|  vue-router  |  3.2.0  |
 |  axios  |  0.20.0  |
+|  typescript  |  4.0.5  |
+|  aspida  |  0.22.2  |
 
 ## Project setup
 ```
@@ -32,9 +33,24 @@ yarn build
 yarn test:unit
 ```
 
-### Lints and fixes files
+### Build Api
+```
+yarn api
+```
+
+### Build and watch Api
+```
+yarn api:watch
+```
+
+### Lints
 ```
 yarn lint
+```
+
+### Lints and fixes files
+```
+yarn lint:fix
 ```
 
 ### Customize configuration

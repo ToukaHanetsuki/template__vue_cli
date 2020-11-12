@@ -42,14 +42,14 @@ module.exports = {
     ],
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/member-delimiter-style': ['error'],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-restricted-syntax': [
       'error',
       'TSEnumDeclaration',
       'ForInStatement',
       'ForOfStatement',
       'LabeledStatement',
-      'WithStatement',
-      'VariableDeclaration[kind="let"]'
+      'WithStatement'
     ]
   },
   overrides: [
