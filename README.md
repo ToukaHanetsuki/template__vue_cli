@@ -17,7 +17,7 @@ yarn build
 
 ### Compiles and minifies for Github pages
 ```
-yarn build:docs
+yarn build --dest docs
 ```
 
 ### Run your unit tests

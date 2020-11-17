@@ -1,4 +1,5 @@
 module.exports = {
-  publicPath: './',
-  transpileDependencies: ['vuex-module-decorators']
+  publicPath: process.env.BASE_URL || '/',
+  transpileDependencies: ['vuex-module-decorators'],
+  productionSourceMap: false,
 };
