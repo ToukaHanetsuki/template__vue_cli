@@ -8,10 +8,10 @@
         About
       </router-link> |
       <a
-        href="https://github.com/ToukaHanetsuki/templete__vue_cli"
+        href="https://github.com/ToukaHanetsuki/template__vue_cli"
         target="_blank"
       >
-        GitHub Repository
+        Repository
       </a>
     </nav>
   </header>
