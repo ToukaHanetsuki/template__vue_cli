@@ -1,33 +1,51 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-
-    <p>{{ counter }}</p>
-    <button @click="increment">
-      increment
-    </button>
-    <button @click="decrement">
-      decrement
-    </button>
-  </div>
+  <HomeTemplate
+    :create-todo-item-form="createTodoItemForm"
+    :todos="todos"
+    @createTodoItem="createTodoItem"
+    @deleteItem="deleteTodoItem"
+  />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { counterModule } from '@/store/modules/counter';
+import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
+import HomeTemplate from '@/components/templates/HomeTemplate.vue';
 
-@Component({})
+@Component({
+  components: {
+    HomeTemplate
+  }
+})
 export default class Home extends Vue {
-  private get counter(): number {
-    return counterModule.counter;
+  private createTodoItemForm: CreateExampleTodoItemType = {
+    title: '',
+    description: ''
+  };
+
+  private get todos() {
+    return exampleTodoModule.list;
   }
 
-  private increment(): void {
-    counterModule.increment();
+  private createTodoItem() {
+    exampleTodoModule.create(this.createTodoItemForm);
+
+    this.initializeValue();
   }
 
-  private decrement(): void {
-    counterModule.decrement();
+  private deleteTodoItem(uuid: string) {
+    exampleTodoModule.delete(uuid);
+  }
+
+  private initializeValue() {
+    this.createTodoItemForm = {
+      title: '',
+      description: ''
+    };
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

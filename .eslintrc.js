@@ -50,7 +50,9 @@ module.exports = {
       'ForOfStatement',
       'LabeledStatement',
       'WithStatement'
-    ]
+    ],
+    'no-undef': 'off',
+    'vue/valid-v-slot': 'off'
   },
   overrides: [
     {

@@ -1,21 +1,26 @@
 import { RouteConfig } from 'vue-router';
-
-// pages
-import Home from '@/pages/Home.vue';
+import { CONST } from '@/plugins/constants';
 
 export const routes: RouteConfig[] = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: CONST.ROUTE_NAME.ROUTE,
+    redirect: { name: CONST.ROUTE_NAME.HOME }
+  },
+  {
+    path: '/home',
+    name: CONST.ROUTE_NAME.HOME,
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/Home.vue')
   },
   {
     path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    component: (): any => import(/* webpackChunkName: "about" */ '@/pages/About.vue')
+    name: CONST.ROUTE_NAME.ABOUT,
+    component: () => import(/* webpackChunkName: "about" */ '@/pages/About.vue')
+  },
+
+  {
+    path: '*',
+    name: CONST.ROUTE_NAME.NOT_FOUND,
+    redirect: { name: CONST.ROUTE_NAME.HOME }
   }
 ];

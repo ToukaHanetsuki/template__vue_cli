@@ -2,9 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-import { CounterState } from '@/store/modules/counter';
+import { ExampleTodoState } from './modules/ExampleTodoModule';
 
-export interface State {
-  counter: CounterState;
+interface State {
+  exampleTodo: ExampleTodoState;
 }
+
 export default new Vuex.Store<State>({});
