@@ -6,7 +6,13 @@
       </router-link> |
       <router-link :to="{name: $CONST.ROUTE_NAME.ABOUT}">
         About
-      </router-link>
+      </router-link> |
+      <a
+        href="https://github.com/ToukaHanetsuki/templete__vue_cli"
+        target="_blank"
+      >
+        GitHub Repository
+      </a>
     </nav>
   </header>
 </template>
