@@ -17,7 +17,7 @@ yarn build
 
 ### Compiles and minifies for Github pages
 ```
-yarn build --dest docs
+PUBLIC_PATH=/template__vue_cli/ yarn build --dest docs
 ```
 
 ### Run your unit tests
