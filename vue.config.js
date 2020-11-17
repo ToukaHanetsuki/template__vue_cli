@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: './',
+  publicPath: '/template__vue_cli/',
   transpileDependencies: ['vuex-module-decorators'],
   productionSourceMap: false,
 };
