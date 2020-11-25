@@ -3,34 +3,20 @@
     class="create-todo-item-form"
     @submit.prevent="createTodoItem"
   >
-    <p>
-      <BaseLabel
-        class="create-todo-item-form__label"
-        for="Icreate-todo-item-form__label--title"
-      >
-        title
-      </BaseLabel>
-      <BaseInput
-        id="Icreate-todo-item-form__label--title"
-        v-model="internalValue.title"
-        autocomplete="title"
-      />
-    </p>
-    <p>
-      <BaseLabel
-        class="create-todo-item-form__label"
-        for="Icreate-todo-item-form__label--description"
-      >
-        description
-      </BaseLabel>
-      <BaseTextarea
-        id="Icreate-todo-item-form__label--description"
-        v-model="internalValue.description"
-        autocomplete="description"
-        cols="30"
-        rows="3"
-      />
-    </p>
+    <FormInputText
+      v-model="internalValue.title"
+      label="title"
+      name="title"
+      autocomplete="title"
+    />
+    <FormInputTextarea
+      v-model="internalValue.description"
+      label="description"
+      name="description"
+      autocomplete="description"
+      cols="30"
+      rows="3"
+    />
     <p>
       <BaseButton :disabled="!isAproveSubmit">
         CREATE
@@ -44,16 +30,14 @@ import { Component, Emit } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import { InternalValueMixin } from '@/mixins/InternalValueMixin';
 import BaseButton from '@/components/atoms/button/BaseButton.vue';
-import BaseInput from '@/components/atoms/input/BaseInput.vue';
-import BaseLabel from '@/components/atoms/label/BaseLabel.vue';
-import BaseTextarea from '@/components/atoms/textarea/BaseTextarea.vue';
+import FormInputText from '@/components/molecules/form/FormInputText.vue';
+import FormInputTextarea from '@/components/molecules/form/FormInputTextarea.vue';
 
 @Component({
   components: {
     BaseButton,
-    BaseInput,
-    BaseLabel,
-    BaseTextarea
+    FormInputText,
+    FormInputTextarea
   }
 })
 export default class CreateTodoItemForm extends mixins<InternalValueMixin<CreateExampleTodoItemType>>(InternalValueMixin) {

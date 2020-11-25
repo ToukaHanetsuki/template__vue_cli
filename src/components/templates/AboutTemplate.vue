@@ -1,19 +1,20 @@
 <template>
   <div class="about">
     <BaseHeader />
-    <AboutMain />
+    <main class="about-main">
+      <h1>About</h1>
+      <p>Do what you like and live</p>
+    </main>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import BaseHeader from '@/components/organisms/header/BaseHeader.vue';
-import AboutMain from '@/components/organisms/main/AboutMain.vue';
 
 @Component({
   components: {
-    BaseHeader,
-    AboutMain
+    BaseHeader
   }
 })
 export default class AboutTemplate extends Vue {}
