@@ -1,9 +1,8 @@
 <template>
   <BaseTable
     class="todo-list-table"
-    :headers="keys"
+    :headers="headers"
     :records="todos"
-    :keys="keys"
   >
     <template #tbody_delete="{ columns }">
       <BaseButton @click="deleteItem(columns.uuid)">
@@ -18,6 +17,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import BaseTable from '@/components/molecules/table/BaseTable.vue';
 import BaseButton from '@/components/atoms/button/BaseButton.vue';
 import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
+import { HeaderRecord } from '@/components/atoms/table/BaseTableHeader.vue';
 
 @Component({
   components: {
@@ -27,17 +27,26 @@ import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
 })
 export default class TodoListTable extends Vue {
 
-  private keys = [
-    'uuid',
-    'title',
-    'description',
-    'delete'
+  /**
+   * ヘッダー情報
+   */
+  private headers: HeaderRecord[] = [
+    { key: 'uuid', name: 'uuid' },
+    { key: 'title', name: 'title' },
+    { key: 'description', name: 'description' },
+    { key: 'delete', name: 'delete' }
   ];
 
+  /**
+   * TODO一覧
+   */
   private get todos() {
     return exampleTodoModule.list;
   }
 
+  /**
+   * TODO削除メソッド
+   */
   private deleteTodoItem(uuid: string) {
     exampleTodoModule.delete(uuid);
   }

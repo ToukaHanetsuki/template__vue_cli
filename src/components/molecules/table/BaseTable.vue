@@ -2,11 +2,11 @@
   <table>
     <BaseTableHeader :headers="headers">
       <template
-        v-for="(_, i) in headers"
-        #[i]="{ column }"
+        v-for="({ key }) in headers"
+        #[key]="{ column }"
       >
         <slot
-          :name="`thead_${i}`"
+          :name="`thead_${key}`"
           :column="column"
         >
           {{ column }}
@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import BaseTableHeader from '@/components/atoms/table/BaseTableHeader.vue';
+import BaseTableHeader, { HeaderRecord } from '@/components/atoms/table/BaseTableHeader.vue';
 import BaseTableBody from '@/components/atoms/table/BaseTableBody.vue';
 
 @Component({
@@ -44,9 +44,12 @@ import BaseTableBody from '@/components/atoms/table/BaseTableBody.vue';
   }
 })
 export default class BaseTable extends Vue {
-  @Prop({required: true}) private headers!: (string|Record<string, unknown>)[];
+  @Prop({required: true}) private headers!: HeaderRecord[];
   @Prop({required: true}) private records!: Record<string, unknown>[];
-  @Prop({required: true}) private keys!: string[];
+
+  private get keys() {
+    return this.headers.map(v => v.key);
+  }
 }
 </script>
 
