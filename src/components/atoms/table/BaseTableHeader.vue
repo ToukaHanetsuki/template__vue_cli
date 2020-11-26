@@ -2,14 +2,14 @@
   <thead>
     <tr>
       <th
-        v-for="(column, i) in headers"
-        :key="i"
+        v-for="({ key, name }) in headers"
+        :key="key"
       >
         <slot
-          :name="i"
-          :column="column"
+          :name="key"
+          :column="name"
         >
-          {{ column }}
+          {{ name }}
         </slot>
       </th>
     </tr>
@@ -19,9 +19,14 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
+export interface HeaderRecord {
+  key: string;
+  name: string;
+}
+
 @Component({})
 export default class BaseTableHeader extends Vue {
-  @Prop({required: true}) private headers!: (string|Record<string, unknown>)[];
+  @Prop({required: true}) private headers!: HeaderRecord[];
 }
 </script>
 
