@@ -1,6 +1,6 @@
 <template>
   <BaseTable
-    class="home-main__todos"
+    class="todo-list-table"
     :headers="keys"
     :records="todos"
     :keys="keys"
@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import BaseTable from '@/components/molecules/table/BaseTable.vue';
 import BaseButton from '@/components/atoms/button/BaseButton.vue';
-import { ExampleTodoItem } from '@/domains/ExampleTodoItem';
+import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
 
 @Component({
   components: {
@@ -26,7 +26,6 @@ import { ExampleTodoItem } from '@/domains/ExampleTodoItem';
   }
 })
 export default class TodoListTable extends Vue {
-  @Prop({required: true}) private todos!: ExampleTodoItem[];
 
   private keys = [
     'uuid',
@@ -35,14 +34,15 @@ export default class TodoListTable extends Vue {
     'delete'
   ];
 
-  @Emit('deleteItem') private deleteItem(uuid: string) {
-    return uuid;
+  private get todos() {
+    return exampleTodoModule.list;
+  }
+
+  private deleteTodoItem(uuid: string) {
+    exampleTodoModule.delete(uuid);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.home-main__todos {
-  width: 100%;
-}
 </style>

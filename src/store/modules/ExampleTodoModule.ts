@@ -19,14 +19,14 @@ class ExampleTodoModule extends VuexModule implements ExampleTodoState {
   ];
 
   @Action({})
-  public create({ title, description }: CreateExampleTodoItemType) {
+  public async create({ title, description }: CreateExampleTodoItemType) {
     const id = uuid();
     const newItem = new ExampleTodoItem({ title, description, uuid: id });
     this._add(newItem);
   }
 
   @Action({})
-  public delete(uuid: string) {
+  public async delete(uuid: string) {
     this._delete(uuid);
   }
 

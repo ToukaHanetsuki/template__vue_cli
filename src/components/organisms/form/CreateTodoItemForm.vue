@@ -3,14 +3,14 @@
     class="create-todo-item-form"
     @submit.prevent="createTodoItem"
   >
-    <FormInputText
-      v-model="internalValue.title"
+    <FormItemInputText
+      v-model="createTodoItemForm.title"
       label="title"
       name="title"
       autocomplete="title"
     />
-    <FormInputTextarea
-      v-model="internalValue.description"
+    <FormItemTextarea
+      v-model="createTodoItemForm.description"
       label="description"
       name="description"
       autocomplete="description"
@@ -26,50 +26,86 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit } from 'vue-property-decorator';
-import { mixins } from 'vue-class-component';
-import { InternalValueMixin } from '@/mixins/InternalValueMixin';
+import { Vue, Component } from 'vue-property-decorator';
 import BaseButton from '@/components/atoms/button/BaseButton.vue';
-import FormInputText from '@/components/molecules/form/FormInputText.vue';
-import FormInputTextarea from '@/components/molecules/form/FormInputTextarea.vue';
+import FormItemInputText from '@/components/molecules/formItem/FormItemInputText.vue';
+import FormItemTextarea from '@/components/molecules/formItem/FormItemTextarea.vue';
+import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
 
 @Component({
   components: {
     BaseButton,
-    FormInputText,
-    FormInputTextarea
+    FormItemInputText,
+    FormItemTextarea
   }
 })
-export default class CreateTodoItemForm extends mixins<InternalValueMixin<CreateExampleTodoItemType>>(InternalValueMixin) {
-  private get isTitle() {
-    const length = this.internalValue.title.length;
+export default class CreateTodoItemForm extends Vue {
+
+  /**
+   * フォーム入力値
+   */
+  private createTodoItemForm: CreateExampleTodoItemType = {
+    title: '',
+    description: ''
+  };
+
+  /**
+   * 作成許可判定
+   */
+  public get isAproveSubmit() {
+    return this.validateTitle() && this.validateDescription();
+  }
+
+  /**
+   * タイトルバリデーション
+   */
+  private validateTitle() {
+    const length = this.createTodoItemForm.title.length;
     return this.$CONST.VALIDATE.TODO_ITEM.TITLE.MIN < length
         && length < this.$CONST.VALIDATE.TODO_ITEM.TITLE.MAX;
   }
 
-  private get isDescription() {
-    const length = this.internalValue.description.length;
+  /**
+   * 本文バリデーション
+   */
+  private validateDescription() {
+    const length = this.createTodoItemForm.description.length;
     return this.$CONST.VALIDATE.TODO_ITEM.DESCRIPTION.MIN < length
         && length < this.$CONST.VALIDATE.TODO_ITEM.DESCRIPTION.MAX;
   }
 
-  public get isAproveSubmit() {
-    return this.isTitle && this.isDescription;
+  /**
+   * TODO作成メソッド
+   */
+  private createTodoItem() {
+    if (!this.isAproveSubmit) return;
+
+    exampleTodoModule.create(this.createTodoItemForm);
+
+    this.initializeValue();
   }
 
-  @Emit('createTodoItem') private createTodoItem(e: Event) {
-    return e;
+  /**
+   * 初期化メソッド
+   */
+  private initializeValue() {
+    this.createTodoItemForm = {
+      title: '',
+      description: ''
+    };
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.create-todo-item-form {
-  text-align: left;
-
-  &__label {
-    width: 100px;
-    display: inline-block;
+  .create-todo-item-form {
+    text-align: left;
   }
-}
+
+  ::v-deep .form-item {
+    &__label {
+      width: 100px;
+      display: inline-block;
+    }
+  }
 </style>
