@@ -18,7 +18,10 @@
       rows="3"
     />
     <p>
-      <BaseButton :disabled="!isAproveSubmit">
+      <BaseButton
+        :disabled="!isAproveSubmit"
+        @click="createTodoItem"
+      >
         CREATE
       </BaseButton>
     </p>
@@ -42,6 +45,11 @@ import { exampleTodoModule } from '@/store/modules/ExampleTodoModule';
 export default class CreateTodoItemForm extends Vue {
 
   /**
+   * 進捗フラグ
+   */
+  private progress = false;
+
+  /**
    * フォーム入力値
    */
   private createTodoItemForm: CreateExampleTodoItemType = {
@@ -49,11 +57,16 @@ export default class CreateTodoItemForm extends Vue {
     description: ''
   };
 
+  /** 進捗状況判定 */
+  private get isProgress() {
+    return this.progress;
+  }
+
   /**
    * 作成許可判定
    */
   public get isAproveSubmit() {
-    return this.validateTitle() && this.validateDescription();
+    return this.validateTitle() && this.validateDescription() && !this.isProgress;
   }
 
   /**
@@ -77,12 +90,13 @@ export default class CreateTodoItemForm extends Vue {
   /**
    * TODO作成メソッド
    */
-  private createTodoItem() {
+  private async createTodoItem() {
     if (!this.isAproveSubmit) return;
 
-    exampleTodoModule.create(this.createTodoItemForm);
-
+    this.progress = true;
+    await exampleTodoModule.create(this.createTodoItemForm);
     this.initializeValue();
+    this.progress = false;
   }
 
   /**

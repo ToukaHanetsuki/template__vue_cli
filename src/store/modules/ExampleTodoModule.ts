@@ -7,6 +7,16 @@ export interface ExampleTodoState {
   list: ExampleTodoItem[];
 }
 
+/** promiseで値を返すためのテストメソッド */
+const promiseFunction = (callback: () => void) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const res = callback();
+      resolve(res);
+    }, 800);
+  });
+};
+
 @Module({ dynamic: true, store: store, name: 'exampleTodoModule', namespaced: true })
 class ExampleTodoModule extends VuexModule implements ExampleTodoState {
 
@@ -20,14 +30,18 @@ class ExampleTodoModule extends VuexModule implements ExampleTodoState {
 
   @Action({})
   public async create({ title, description }: CreateExampleTodoItemType) {
-    const id = uuid();
-    const newItem = new ExampleTodoItem({ title, description, uuid: id });
-    this._add(newItem);
+    await promiseFunction(() => {
+      const id = uuid();
+      const newItem = new ExampleTodoItem({ title, description, uuid: id });
+      this._add(newItem);
+    });
   }
 
   @Action({})
   public async delete(uuid: string) {
-    this._delete(uuid);
+    await promiseFunction(() => {
+      this._delete(uuid);
+    });
   }
 
   @Mutation
