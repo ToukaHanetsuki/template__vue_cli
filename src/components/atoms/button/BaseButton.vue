@@ -20,5 +20,10 @@ export default class BaseButton extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+  .base-button {
+    cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
 </style>

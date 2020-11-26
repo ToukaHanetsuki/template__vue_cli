@@ -5,7 +5,10 @@
     :records="todos"
   >
     <template #tbody_delete="{ columns }">
-      <BaseButton @click="deleteItem(columns.uuid)">
+      <BaseButton
+        :disabled="isProgress"
+        @click="deleteTodoItem(columns.uuid)"
+      >
         DELETE
       </BaseButton>
     </template>
@@ -28,6 +31,11 @@ import { HeaderRecord } from '@/components/atoms/table/BaseTableHeader.vue';
 export default class TodoListTable extends Vue {
 
   /**
+   * 進捗フラグ
+   */
+  private progress = false;
+
+  /**
    * ヘッダー情報
    */
   private headers: HeaderRecord[] = [
@@ -36,6 +44,11 @@ export default class TodoListTable extends Vue {
     { key: 'description', name: 'description' },
     { key: 'delete', name: 'delete' }
   ];
+
+  /** 進捗状況判定 */
+  private get isProgress() {
+    return this.progress;
+  }
 
   /**
    * TODO一覧
@@ -47,8 +60,12 @@ export default class TodoListTable extends Vue {
   /**
    * TODO削除メソッド
    */
-  private deleteTodoItem(uuid: string) {
-    exampleTodoModule.delete(uuid);
+  private async deleteTodoItem(uuid: string) {
+    if (this.progress) return;
+
+    this.progress = true;
+    await exampleTodoModule.delete(uuid);
+    this.progress = false;
   }
 }
 </script>
