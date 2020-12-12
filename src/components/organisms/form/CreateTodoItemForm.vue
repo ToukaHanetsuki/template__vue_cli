@@ -118,8 +118,8 @@ export default class CreateTodoItemForm extends Vue {
 
   ::v-deep .form-item {
     &__label {
-      width: 100px;
       display: inline-block;
+      width: 100px;
     }
   }
 </style>

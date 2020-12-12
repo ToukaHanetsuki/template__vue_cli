@@ -25,14 +25,14 @@ yarn build:docs
 yarn test:unit
 ```
 
-### Lints
+### Lints and fixes files
 ```
 yarn lint
 ```
 
-### Lints and fixes files
+### Lints and fixes files for .scss .vue
 ```
-yarn lint:fix
+yarn lint:style
 ```
 
 ### Customize configuration
