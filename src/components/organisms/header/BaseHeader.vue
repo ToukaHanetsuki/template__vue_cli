@@ -28,11 +28,9 @@ export default class BaseHeader extends Vue {
 <style lang="scss" scoped>
 .base-header {
   padding: 30px;
-
   a {
-    font-weight: bold;
     color: #2c3e50;
-
+    font-weight: bold;
     &.router-link-exact-active {
       color: #42b983;
     }

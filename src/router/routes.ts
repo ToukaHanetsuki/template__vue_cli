@@ -1,5 +1,5 @@
 import { RouteConfig } from 'vue-router';
-import { CONST } from '@/plugins/constants';
+import { CONST } from '@/plugins/constant';
 
 export const routes: RouteConfig[] = [
   {

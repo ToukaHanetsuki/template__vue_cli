@@ -1,7 +1,7 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
 import store from '@/store';
-import { ExampleTodoItem } from '@/domains/ExampleTodoItem';
-import { uuid } from '@/plugins/uuid';
+import { ExampleTodoItem } from '@/models/ExampleTodoItem';
+import { uuid } from '@/modules/uuid';
 
 export interface ExampleTodoState {
   list: ExampleTodoItem[];
