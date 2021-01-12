@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:docs": "PUBLIC_PATH=/template__vue_cli/ yarn build --dest docs",
+    "build:docs": "PUBLIC_PATH=/tm__vue-cli/ yarn build --dest docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:style": "stylelint \"**/*.vue\" \"**/*.scss\" --fix"
